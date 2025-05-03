@@ -60,7 +60,7 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const userData = yield user.save();
         if (userData) {
             req.session.user = userData.id;
-            res.status(200).json({ success: true, message: "Successfully registered" });
+            res.status(200).json({ success: true });
         }
         else {
             res.status(500).json({ success: false, message: "Registration failed" });
@@ -134,9 +134,9 @@ const home = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             if (userData) {
                 res.render('home', { user: userData });
             }
-            else {
-                res.redirect('/');
-            }
+            //  else {
+            //   res.redirect('/');
+            // }
         }
         else {
             res.redirect('/');

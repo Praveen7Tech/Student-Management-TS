@@ -2,70 +2,92 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Home</title>
+  <title>User Profile</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    .container {
-      max-width: 600px;
-      margin: 50px auto;
-      padding: 30px;
-      text-align: center;
-      border: 1px solid #ccc;
-      border-radius: 10px;
+    body {
+      background: #f8f9fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    .details {
-      margin-top: 20px;
-      text-align: left;
+    .container {
+      max-width: 600px;
+      margin: 60px auto;
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .details p {
+      font-size: 1.1rem;
+      margin: 15px 0;
+      color: #555;
+    }
+
+    .details strong {
+      color: #000;
+    }
+
+    .action-btn, .logout-btn {
+      margin: 10px 5px;
+      padding: 10px 24px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+    }
+
+    .edit-btn {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    .edit-btn:hover {
+      background-color: #0056b3;
     }
 
     .logout-btn {
-      margin-top: 30px;
-      padding: 10px 20px;
-      background-color: crimson;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+      background-color: #dc3545;
+      color: #fff;
     }
 
     .logout-btn:hover {
-      background-color: darkred;
+      background-color: #a71d2a;
     }
 
-    .action-btn {
-      background-color: aqua;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+    a {
+      text-decoration: none;
     }
   </style>
 </head>
 
 <body>
-
   <div class="container">
     <h1>Welcome, <%= user.name %>!</h1>
 
     <div class="details">
-      <p><strong>Email:</strong>
-        <%= user.email %>
-      </p>
-      <p><strong>Phone:</strong>
-        <%= user.phone %>
-      </p>
+      <p><strong>Email:</strong> <%= user.email %></p>
+      <p><strong>Phone:</strong> <%= user.phone %></p>
     </div>
 
     <a href="/edit/<%= user._id %>">
-      <button class="action-btn edit-btn">Edit</button>
+      <button class="action-btn edit-btn">Edit Profile</button>
     </a>
 
-    <form action="/logout" method="POST">
-      <button type="submit" class="logout-btn">Logout</button>
+    <form action="/logout" method="POST" style="display: inline;">
+      <button type="submit" class="action-btn logout-btn">Logout</button>
     </form>
   </div>
-
 </body>
+
 
 </html>

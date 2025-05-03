@@ -54,7 +54,7 @@ const signup = async (req: Request, res: Response): Promise<void> => {
   
       if (userData) {
         req.session.user = userData.id;
-        res.status(200).json({ success: true, message: "Successfully registered" });
+        res.status(200).json({ success: true});
       } else {
         res.status(500).json({ success: false, message: "Registration failed" });
       }
@@ -133,9 +133,10 @@ const home = async (req:Request,res:Response)=>{
           console.log("userData:",userData)
           if (userData) {
             res.render('home', { user: userData });
-          } else {
-            res.redirect('/');
           }
+          //  else {
+          //   res.redirect('/');
+          // }
         } else {
           res.redirect('/');
         }

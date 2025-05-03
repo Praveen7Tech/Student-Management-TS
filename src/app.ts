@@ -51,7 +51,8 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
   app.use("/",user);
   app.use("/admin",admin)
-//app.use("/admin", admin);
+
+  console.log("haiiii")
 
 app.listen(3000, () => {
     console.log("Server running on http://localhost:3000");

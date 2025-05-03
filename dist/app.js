@@ -43,7 +43,7 @@ app.use('/public', express_1.default.static(path_1.default.join(__dirname, '../p
 }));
 app.use("/", userRoutes_1.default);
 app.use("/admin", adminRoutes_1.default);
-//app.use("/admin", admin);
+console.log("haiiii");
 app.listen(3000, () => {
     console.log("Server running on http://localhost:3000");
 });
