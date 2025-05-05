@@ -69,7 +69,7 @@ const signup = async (req: Request, res: Response): Promise<void> => {
         if(!req.session.user){
            return  res.render("login");
         }else{
-            return res.redirect('/home')
+          return res.redirect('/')
         }
         
     } catch (error) {
@@ -79,9 +79,10 @@ const signup = async (req: Request, res: Response): Promise<void> => {
 
 const login = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
+      console.log("enter login")
       const { email, password } = req.body;
       const user = await userModel.findOne({ email });
-      console.log(user)
+      console.log("--",user)
   
       if (!user) {
         res.json({ success: false, message: 'Email not found!' });
@@ -102,6 +103,8 @@ const login = async (req: Request, res: Response, next: NextFunction): Promise<v
   
       req.session.user = user._id;
       res.json({ success: true, message: 'Login successful' });
+      console.log("log success---");
+      
   
     } catch (error) {
       console.error(error);
@@ -118,6 +121,7 @@ const logout = async (req: Request, res: Response): Promise<void> => {
                 res.status(500).send("An error occurred while logging out.");
                 return;
             }
+            res.clearCookie('connect.sid'); 
             res.redirect("/login");
         });
     } catch (error) {
@@ -128,17 +132,18 @@ const logout = async (req: Request, res: Response): Promise<void> => {
 
 const home = async (req:Request,res:Response)=>{
     try {
+      console.log("home pagee----")
         if (req.session.user) {
           const userData = await userModel.findById(req.session.user);
           console.log("userData:",userData)
           if (userData) {
             res.render('home', { user: userData });
           }
-          //  else {
-          //   res.redirect('/');
-          // }
+           else {
+            res.redirect('/');
+          }
         } else {
-          res.redirect('/');
+          res.redirect('/login');
         }
       } catch (error) {
         console.log(error);

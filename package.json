@@ -5,7 +5,8 @@
   "scripts": {
     "build": "tsc && npm run copy-views",
     "copy-views": "xcopy views dist\\views /E /I /Y",
-    "start": "node dist/app.js"
+    "start": "node dist/app.js",
+    "dev": "ts-node-dev --respawn --transpile-only src/app.ts"
   },
   "author": "",
   "license": "ISC",

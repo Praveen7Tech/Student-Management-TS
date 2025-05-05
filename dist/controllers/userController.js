@@ -77,7 +77,7 @@ const getLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             return res.render("login");
         }
         else {
-            return res.redirect('/home');
+            return res.redirect('/');
         }
     }
     catch (error) {
@@ -86,9 +86,10 @@ const getLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 const login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        console.log("enter login");
         const { email, password } = req.body;
         const user = yield userModel_1.default.findOne({ email });
-        console.log(user);
+        console.log("--", user);
         if (!user) {
             res.json({ success: false, message: 'Email not found!' });
             return;
@@ -104,6 +105,7 @@ const login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* ()
         }
         req.session.user = user._id;
         res.json({ success: true, message: 'Login successful' });
+        console.log("log success---");
     }
     catch (error) {
         console.error(error);
@@ -118,6 +120,7 @@ const logout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 res.status(500).send("An error occurred while logging out.");
                 return;
             }
+            res.clearCookie('connect.sid');
             res.redirect("/login");
         });
     }
@@ -134,12 +137,12 @@ const home = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             if (userData) {
                 res.render('home', { user: userData });
             }
-            //  else {
-            //   res.redirect('/');
-            // }
+            else {
+                res.redirect('/');
+            }
         }
         else {
-            res.redirect('/');
+            res.redirect('/login');
         }
     }
     catch (error) {
